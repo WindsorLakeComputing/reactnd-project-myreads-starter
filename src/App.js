@@ -16,18 +16,6 @@ class BooksApp extends React.Component {
     showSearchPage: true
   }
 
-
-/**
-  componentDidMount() {
-    //console.log("this.state.query == ", this.state.query)
-    var theQuery = this.state.query
-    console.log("theQuery == ", theQuery)
-    BooksAPI.search(this.state.query, 10).then((books) => {
-      this.setState({ books })
-    })
-  }
-  */
-
   updateQuery = (query) => {
     this.setState({ query: query.trim() })
     BooksAPI.search(query, 1000).then((books) => {
