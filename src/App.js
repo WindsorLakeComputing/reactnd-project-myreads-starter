@@ -14,6 +14,7 @@ class BooksApp extends React.Component {
     currentlyReading: [],
     books: [],
     wantToRead: [],
+    read: [],
     showSearchPage: true
   }
 
@@ -38,6 +39,8 @@ class BooksApp extends React.Component {
         this.setState({currentlyReading: this.state.currentlyReading.concat( [book] )})
       case 'wantToRead':
         this.setState({wantToRead: this.state.wantToRead.concat( [book] )})
+      case 'read':
+        this.setState({read: this.state.read.concat( [book] )})
       }
     console.log(book);
     /**
