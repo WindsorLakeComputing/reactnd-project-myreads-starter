@@ -5,24 +5,33 @@ import escapeRegExp from 'escape-string-regexp'
 class ListBooks extends Component {
   static propTypes = {
     books: PropTypes.array.isRequired,
+    onAddBookChoice: PropTypes.func.isRequired
+  }
+
+  
+
+  handleChange = (e) => {
+    console.log(e.target.value)
+    //this.setState({selectValue:e.target.value});
   }
 
   render() {
-    const { books } = this.props
+    const { books, onAddBookChoice } = this.props
+
     return (
       <div className='bookshelf-books'>
-        <ol className='books-grid'>
+        <ol className='books-grid'>            
           {books.map((book) => (
-            <li key={book.industryIdentifiers.identifier} className='book-list-item'>
+            <li key={book.id} className='book-list-item'>
               <div className="book">
                 <div className="book-top">
                   <div className="book-cover"  style={{ width: 128, height:192, backgroundImage: `url(${book.imageLinks.thumbnail})`}}></div>
                     <div className='book-shelf-changer'>
-                      <select>
+                      <select onChange={this.handleChange}>
                         <option value="none" disabled>Move to...</option>
-                        <option value="currentlyReading">Currently Reading</option>
-                        <option value="wantToRead">Want to Read</option>
-                       <option value="read">Read</option>
+                        <option value={book.id + "currentlyReading"}>Currently Reading</option>
+                        <option value={book.id + "wantToRead"}>Want to Read</option>
+                       <option value={book.id + "read"}>Read</option>
                       </select>
                     </div>
                   </div>

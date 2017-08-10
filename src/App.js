@@ -22,6 +22,24 @@ class BooksApp extends React.Component {
       this.setState({ books })
     })
   }
+/**
+  removeContact = (contact) => {
+    this.setState((state) => ({
+      contacts: state.contacts.filter((c) => c.id !== contact.id)
+    }))
+
+    ContactsAPI.remove(contact)
+  }
+*/
+  addBookChoice = (book) => {
+    console.log(book);
+    /**
+    this.setState((state) => ({
+      contacts: state.contacts.filter((c) => c.id !== contact.id)
+    }))
+    */
+
+  }
 
   render() {
     return (
@@ -51,6 +69,7 @@ class BooksApp extends React.Component {
           <div className="list-books">
             <ListBooks
                   books={this.state.books}
+                  onAddBookChoice={this.addBookChoice}
                 />
            
           </div>
