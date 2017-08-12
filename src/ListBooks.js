@@ -24,6 +24,8 @@ class ListBooks extends Component {
 
   render() {
     const { books } = this.props
+    console.log("Inside ListBooks.js ... Books are ... ")
+    console.log(books)
 
     return (
       <div className='bookshelf-books'>

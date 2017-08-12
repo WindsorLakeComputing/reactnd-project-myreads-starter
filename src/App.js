@@ -36,11 +36,11 @@ class BooksApp extends React.Component {
   addBookChoice = (book) => {
     switch (book.choice) {
       case 'currentlyReading':
-        this.setState({currentlyReading: this.state.currentlyReading.concat( [book] )})
+        this.setState({currentlyReading: this.state.currentlyReading.concat( book )})
       case 'wantToRead':
-        this.setState({wantToRead: this.state.wantToRead.concat( [book] )})
+        this.setState({wantToRead: this.state.wantToRead.concat( book )})
       case 'read':
-        this.setState({read: this.state.read.concat( [book] )})
+        this.setState({read: this.state.read.concat( book )})
       }
     console.log(book);
     /**
@@ -52,26 +52,6 @@ class BooksApp extends React.Component {
   }
 
   render() {
-    var defaults = {
-    name : "mikeyCheck",
-    valuesArray : [{
-        label : "My Checkbox Field",
-        value: "MyCheckboxField",
-        checked : false
-    }, {
-        label : "My Other Checkbox Field",
-        value : "MyOtherCheckboxField",
-        checked : false
-    }, {
-        label : "Yet Another Checkbox Field",
-        value : "YetAnotherCheckboxField",
-        checked : true
-    },{
-        label : "Yes, it's a fourth checkbox field",
-        value : "YesItsAFourthCheckboxField",
-        checked : false
-    }]
-}; 
     return (
       <div className="app">
         {this.state.showSearchPage ? (
@@ -94,12 +74,20 @@ class BooksApp extends React.Component {
             <div className="search-books-results">
               <ol className="books-grid"></ol>
             </div>
-          </div>
-        ) : (
-          <div className="list-books">
+          
+           <div className="list-books">
             <ListBooks
                   books={this.state.books}
-                  bookOptions={defaults}
+                  onAddBookChoice={this.addBookChoice}
+                />
+          </div>
+          </div>
+
+        ) : (
+
+          <div className="list-books">
+            <ListBooks
+                  books={this.state.read}
                   onAddBookChoice={this.addBookChoice}
 
                 />
