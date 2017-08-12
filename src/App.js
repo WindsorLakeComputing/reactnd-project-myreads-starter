@@ -52,6 +52,26 @@ class BooksApp extends React.Component {
   }
 
   render() {
+    var defaults = {
+    name : "mikeyCheck",
+    valuesArray : [{
+        label : "My Checkbox Field",
+        value: "MyCheckboxField",
+        checked : false
+    }, {
+        label : "My Other Checkbox Field",
+        value : "MyOtherCheckboxField",
+        checked : false
+    }, {
+        label : "Yet Another Checkbox Field",
+        value : "YetAnotherCheckboxField",
+        checked : true
+    },{
+        label : "Yes, it's a fourth checkbox field",
+        value : "YesItsAFourthCheckboxField",
+        checked : false
+    }]
+}; 
     return (
       <div className="app">
         {this.state.showSearchPage ? (
@@ -79,7 +99,9 @@ class BooksApp extends React.Component {
           <div className="list-books">
             <ListBooks
                   books={this.state.books}
+                  bookOptions={defaults}
                   onAddBookChoice={this.addBookChoice}
+
                 />
            
           </div>

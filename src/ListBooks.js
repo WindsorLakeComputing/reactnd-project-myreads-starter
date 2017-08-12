@@ -8,25 +8,18 @@ class ListBooks extends Component {
     onAddBookChoice: PropTypes.func.isRequired
   }
 
-  
+  state = {
+    value:''
+  }
 
   handleChange = (e) => {
     const { books, onAddBookChoice } = this.props
-    console.log(e.target.value)
+    this.setState({value: e.target.value});
     var id = e.target.value.split("|")[0]
     var choice = e.target.value.split("|")[1]
-    console.log('choice ==' + choice)
     let bookChoice = books.filter((book) => book.id == id)
     bookChoice.choice = choice
-    //console.log(bookChoice)
     onAddBookChoice(bookChoice)
-    //const { onAddBookChoice } = this.props
-    /**
-    contacts: state.contacts.filter((c) => c.id !== contact.id)
-    bookChoice = books.filter((book) => )
-    onAddBookChoice(e.target.value)
-    */
-    //this.setState({selectValue:e.target.value});
   }
 
   render() {
@@ -41,7 +34,7 @@ class ListBooks extends Component {
                 <div className="book-top">
                   <div className="book-cover"  style={{ width: 128, height:192, backgroundImage: `url(${book.imageLinks.thumbnail})`}}></div>
                     <div className='book-shelf-changer'>
-                      <select onChange={this.handleChange}>
+                      <select value={this.state.value} onChange={this.handleChange}>
                         <option value="none" disabled>Move to...</option>
                         <option value={book.id + "|currentlyReading"}>Currently Reading</option>
                         <option value={book.id + "|wantToRead"}>Want to Read</option>
