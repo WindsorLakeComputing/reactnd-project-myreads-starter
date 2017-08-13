@@ -18,6 +18,7 @@ class ListBooks extends Component {
     var id = e.target.value.split("|")[0]
     var choice = e.target.value.split("|")[1]
     let bookChoice = books.filter((book) => book.id == id)
+    console.log("Inside of ListBooks.js the choice is ", choice)
     bookChoice.choice = choice
     onAddBookChoice(bookChoice)
   }
