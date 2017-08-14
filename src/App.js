@@ -33,9 +33,23 @@ class BooksApp extends React.Component {
     ContactsAPI.remove(contact)
   }
 */
-  addBookChoice = (book) => {
-    console.log("THE BOOK CHOICE IS ", book.choice);
-    switch (book.choice) {
+  addBookChoice = (bookIdChoice) => {
+    console.log("THE BOOK ID CHOICE IS ", bookIdChoice);
+    
+
+    
+    var id = bookIdChoice.split("|")[0]
+    var choice = bookIdChoice.split("|")[1]
+    var book = this.state.books.filter((book) => book.id == id)
+    console.log("Inside of ListBooks.js the choice is ", choice)
+    book[choice] = bookIdChoice
+    console.log("book.choice == ", book.choice)
+    console.log("THE BIG BOOK IS ", book)
+
+
+
+
+    switch (choice) {
       case 'currentlyReading':
         this.setState({currentlyReading: this.state.currentlyReading.concat( book )})
         break;
@@ -43,9 +57,10 @@ class BooksApp extends React.Component {
         this.setState({wantToRead: this.state.wantToRead.concat( book )})
         break;
       case 'read':
-        this.setState({read: this.state.read.concat( book )})
+        this.setState({read: this.state.read.concat( book[choice] = bookIdChoice )})
         break;
       }
+    console.log("After setting state the book is ");
     console.log(book);
     /**
     this.setState((state) => ({
@@ -71,6 +86,7 @@ class BooksApp extends React.Component {
                   However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
                   you don't find a specific author or title. Every search is limited by search terms.
                 */}
+
                 <input type="text" onChange={(event) => this.updateQuery(event.target.value)} placeholder="Search by title or author" content={this.state.query}/>
     
               </div>
