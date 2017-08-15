@@ -45,7 +45,7 @@ class ListBooks extends Component {
                 <div className="book-top">
                   <div className="book-cover"  style={{ width: 128, height:192, backgroundImage: `url(${book.imageLinks.thumbnail})`}}></div>
                     <div className='book-shelf-changer'>
-                      <select value={book.choice} onChange={this.handleChange} >
+                      <select value={book.id + "|" + book.shelf} onChange={this.handleChange} >
                         <option value="none" disabled>Move to...</option>
                         <option value={book.id + "|currentlyReading"}>Currently Reading</option>
                         <option value={book.id + "|wantToRead"}>Want to Read</option>
