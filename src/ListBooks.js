@@ -39,7 +39,6 @@ class ListBooks extends Component {
       <div className='bookshelf-books'>
         <ol className='books-grid'>            
           {books.map((book) => (
-            console.log("HERE IT IS ", {book}),
             <li key={book.id} className='book-list-item'>
               <div className="book">
                 <div className="book-top">

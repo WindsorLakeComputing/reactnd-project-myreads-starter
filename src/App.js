@@ -34,15 +34,11 @@ class BooksApp extends React.Component {
     ContactsAPI.remove(contact)
   }
 */
-  
-  
-  componentDidMount(){
-    BooksAPI.getAll().then((books) => {
-          books.map((book) => {
 
-            switch (book.shelf) {
+   mapBookToState (book) {
+     switch (book.shelf) {
               case 'currentlyReading':
-                this.setState({currentlyReading: this.state.currentlyReading.concat( [book] )})
+                this.setState({currentlyReading: this.state.currentlyReading.concat( book )})
                 break;
               case 'wantToRead':
                 this.setState({wantToRead: this.state.wantToRead.concat( book )})
@@ -51,10 +47,15 @@ class BooksApp extends React.Component {
                 this.setState({read: this.state.read.concat( book )})
                 break;
             }
-           
 
+  }
+  
+  
+  componentDidMount(){
+    BooksAPI.getAll().then((books) => {
+          books.map((book) => {
+            this.mapBookToState(book)
             }
-          
        )}
  ) }
   
@@ -70,53 +71,28 @@ class BooksApp extends React.Component {
     var book = this.state.books.filter((book) => book.id == id)
     console.log("Inside of ListBooks.js the choice is ", choice)
     //book.choice = bookIdChoice
+    book.shelf = choice
     console.log("THE BIG BOOK IS ", book)
     //book.shelf = "wantToRead"
 
-    var effBook = "read"
-    var aBook = BooksAPI.get(id);
-    console.log("aBook == ", aBook)
-    BooksAPI.update(aBook, effBook).then(()=>{
+    this.mapBookToState(book);
+
+    
+    console.log("choice == ", choice)
+    
+    BooksAPI.update(book, choice).then(()=>{
            console.log('book was updated');            
        })
-
-/**
-    BooksAPI.get(id).then((bookz) => {
-      console.log(bookz)
-    })
-    */
+  
     
-   
 
-
-/**
-    switch (choice) {
-      case 'currentlyReading':
-        this.setState({currentlyReading: this.state.currentlyReading.concat( [book] )})
-        break;
-      case 'wantToRead':
-        this.setState({wantToRead: this.state.wantToRead.concat( book )})
-        break;
-      case 'read':
-        this.setState({read: this.state.read.concat( book )})
-        break;
-      }
-      */
     console.log("After setting state the book is ");
     console.log(book);
-    /**
-    this.setState((state) => ({
-      contacts: state.contacts.filter((c) => c.id !== contact.id)
-    }))
-    */
+   
 
   }
 
   render() {
-    console.log("JELLO!!!!!")
-    BooksAPI.get("tUwqbo48lp4C").then((bookz) => {
-      console.log(bookz)
-    })
     return (
       <div className="app">
         {this.state.showSearchPage ? (
