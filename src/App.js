@@ -16,7 +16,6 @@ class BooksApp extends React.Component {
     wantToRead: [],
     read: [],
     showSearchPage: true,
-    bookz: []
   }
 
   updateQuery = (query) => {
@@ -35,8 +34,12 @@ class BooksApp extends React.Component {
   }
 */
 
-   mapBookToState (book) {
-     switch (book.shelf) {
+   mapBookToState (book, shelf) {
+    if (book.shelf){
+      shelf = book.shelf
+    }
+    
+     switch (shelf) {
               case 'currentlyReading':
                 this.setState({currentlyReading: this.state.currentlyReading.concat( book )})
                 break;
@@ -47,20 +50,30 @@ class BooksApp extends React.Component {
                 this.setState({read: this.state.read.concat( book )})
                 break;
             }
+    }
 
-  }
+  
   
   
   componentDidMount(){
     BooksAPI.getAll().then((books) => {
-          books.map((book) => {
+          books.map((book, None) => {
             this.mapBookToState(book)
             }
        )}
  ) }
   
 
-  addBookChoice = (bookIdChoice) => {
+  addBookChoice = (book, shelf) => {
+    console.log("Inside of AddBookChoice the book is ", book, " the value is ", shelf)
+    book.shelf = shelf;
+    this.mapBookToState(book, shelf);
+    BooksAPI.update(book, shelf).then(()=>{
+           console.log('book was updated');            
+       })
+
+
+    /**
     console.log("THE BOOK ID CHOICE IS ", bookIdChoice);
 
 
@@ -88,6 +101,7 @@ class BooksApp extends React.Component {
 
     console.log("After setting state the book is ");
     console.log(book);
+    */
    
 
   }

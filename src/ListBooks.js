@@ -12,7 +12,7 @@ class ListBooks extends Component {
     value:''
   }
   */
-
+/**
   handleChange = (e) => {
     const { onAddBookChoice } = this.props
     /**
@@ -22,11 +22,12 @@ class ListBooks extends Component {
     let bookChoice = books.filter((book) => book.id == id)
     console.log("Inside of ListBooks.js the choice is ", choice)
     bookChoice.choice = choice
-    */
+    
     //bookChoice.choice = e.target.value
     //console.log("BOOK choice is ", bookChoice.choice)
     onAddBookChoice(e.target.value)
   }
+  */
 
   render() {
     //console.log("this.state.value ==", this.state.value);
@@ -44,11 +45,11 @@ class ListBooks extends Component {
                 <div className="book-top">
                   <div className="book-cover"  style={{ width: 128, height:192, backgroundImage: `url(${book.imageLinks.thumbnail})`}}></div>
                     <div className='book-shelf-changer'>
-                      <select value={book.id + "|" + book.shelf} onChange={this.handleChange} >
+                      <select value={book.shelf} onChange={(event) => this.props.onAddBookChoice(book, event.target.value)}  >
                         <option value="none" disabled>Move to...</option>
-                        <option value={book.id + "|currentlyReading"}>Currently Reading</option>
-                        <option value={book.id + "|wantToRead"}>Want to Read</option>
-                       <option value={book.id + "|read"}>Read</option>
+                        <option value={"currentlyReading"}>Currently Reading</option>
+                        <option value={"wantToRead"}>Want to Read</option>
+                       <option value={"read"}>Read</option>
                       </select>
                     </div>
                   </div>
