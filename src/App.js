@@ -18,12 +18,67 @@ class BooksApp extends React.Component {
     showSearchPage: true,
   }
 
+  updateSearchResults(state, book) {
+    state.map((e) => {
+    if(book.id == e.id){
+          book.shelf = e.shelf
+        }
+      }
+      )
+  }
+
   updateQuery = (query) => {
     this.setState({ query: query.trim() })
-    BooksAPI.search(query, 1000).then((books) => {
-      this.setState({ books })
+
+
+     BooksAPI.search(query, 1000).then((books) => {
+      
+      books.map((book) => {
+      this.updateSearchResults(this.state.wantToRead, book)
+      this.updateSearchResults(this.state.read, book)
+      this.updateSearchResults(this.state.currentlyReading, book)
+     
+      this.setState({ books: books })
+})})}
+   
+/**
+    .then((books) => {
+      retBooks = [books]
     })
-  }
+    */
+
+
+
+      /**
+      books.map((book) => {
+        book.shelf = "reading"
+        console.log(book)
+
+/**
+        this.setState((state) => ({
+      books: this.state.read.concat( state.read.filter((c) => c.id == book.id))
+    }))
+
+         this.setState((state) => ({
+      books: this.state.currentlyReading.concat( state.currentlyReading.filter((c) => c.id == book.id))
+    }))
+
+this.setState((state) => ({
+      books: this.state.wantToRead.concat( state.wantToRead.filter((c) => c.id == book.id))
+    }))
+    */
+
+
+
+        //console.log(this.state.read.filter((c) => c.id == book.id))
+
+        //console.log(book)
+      //}
+      //this.setState({ books })
+    //})
+    //)}
+  //)}
+
 /**
   removeContact = (contact) => {
     this.setState((state) => ({
@@ -140,68 +195,41 @@ class BooksApp extends React.Component {
           </div>
 
         ) : (
-        <div className="list-books">
-            <div className="list-books-title">
-              <h1>MyReads</h1>
-            </div>
-            <div className="list-books-content">
-              <div>
-                <div className="bookshelf">
-                  <h2 className="bookshelf-title">Currently Reading</h2>
-                  <div className="bookshelf-books">
+       <div className="list-books">
+    <div className="list-books-title">
+        <h1>MyReads</h1>
+    </div>
+    <div className="list-books-content">
+        <div>
+            <div className="bookshelf">
+                <h2 className="bookshelf-title">Currently Reading</h2>
+                <div className="bookshelf-books">
                     <ol className="books-grid">
-                          
-                            <ListBooks
-                                  books={this.state.currentlyReading}
-                                  onAddBookChoice={this.addBookChoice}
-                                />
-                       
-                           </ol>
-                  </div>
-                    
-        <div className="bookshelf">
-                  <h2 className="bookshelf-title">Want to Read</h2>
-                 
-                  <ol className="books-grid">
-        
-                            <ListBooks
-                                  books={this.state.wantToRead}
-                                  onAddBookChoice={this.addBookChoice}
-                                />
-                             
-                     </ol>
-                     
-                      
-
-
-
- <div className="bookshelf">
-                  <h2 className="bookshelf-title">Read</h2>
-                  <div className="bookshelf-books">
-                    <ol className="books-grid">
-                      
-                   
-                            <ListBooks
-                                  books={this.state.read}
-                                  onAddBookChoice={this.addBookChoice}
-                                />
-                        
-                      
-                      </ol>
-                      </div>
-                      </div>
-
-
-
-              </div>
-                  </div>
+                        <ListBooks books={this.state.currentlyReading} onAddBookChoice={this.addBookChoice} />
+                    </ol>
                 </div>
-              </div>
-            </div>   
-        )}
-      </div>
-    )
-  }
+                <div className="bookshelf">
+                    <h2 className="bookshelf-title">Want to Read</h2>
+                    <ol className="books-grid">
+                        <ListBooks books={this.state.wantToRead} onAddBookChoice={this.addBookChoice} />
+                    </ol>
+                    <div className="bookshelf">
+                        <h2 className="bookshelf-title">Read</h2>
+                        <div className="bookshelf-books">
+                            <ol className="books-grid">
+                                <ListBooks books={this.state.read} onAddBookChoice={this.addBookChoice} />
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+)}
+</div>
+)
+}
 }
 
 export default BooksApp
