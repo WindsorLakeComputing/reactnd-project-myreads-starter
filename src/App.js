@@ -32,14 +32,22 @@ class BooksApp extends React.Component {
 
 
      BooksAPI.search(query, 1000).then((books) => {
-      
+      if((books !== undefined) && (books.length > 0)){
       books.map((book) => {
       this.updateSearchResults(this.state.wantToRead, book)
       this.updateSearchResults(this.state.read, book)
       this.updateSearchResults(this.state.currentlyReading, book)
      
       this.setState({ books: books })
-})})}
+}
+
+)}
+    }
+      )
+ }
+
+
+
    
 /**
     .then((books) => {
@@ -119,19 +127,23 @@ this.setState((state) => ({
  ) }
 
 
-  removeDuplicate(CurState, bookId){
+  removeDuplicate(name, CurState, bookId){
     console.log("BOOKID IZZ ... ", bookId)
+    console.log("ITZZZ NAme is ", name)
+    
 
-     this.setState({CurState: CurState.filter((b) => b.id !== bookId)})
+    //var bread = CurState.filter((b) => b.id !== bookId)
+    this.setState((name) => ({
+      name: CurState.filter((b) => b.id !== bookId)}))
   }
   
 
   addBookChoice = (book, shelf) => {
     console.log("Inside of AddBookChoice the book is ", book, " the value is ", shelf)
 
-    this.removeDuplicate(this.state.read, book.id)
+    //this.removeDuplicate("bread",this.state.read, book.id)
     
-/**
+
     this.setState((state) => ({
       read: state.read.filter((b) => b.id !== book.id)
     }))
@@ -141,7 +153,7 @@ this.setState((state) => ({
     this.setState((state) => ({
       wantToRead: state.wantToRead.filter((b) => b.id !== book.id)
     }))
-    */
+    
     BooksAPI.update(book, shelf).then(()=>{
            console.log('book was updated');            
        })
@@ -206,13 +218,14 @@ this.setState((state) => ({
             <div className="search-books-results">
               <ol className="books-grid"></ol>
             </div>
-          
+          {(this.state.books !== undefined) && (
            <div className="list-books">
             <ListBooks
                   books={this.state.books}
                   onAddBookChoice={this.addBookChoice}
                 />
           </div>
+        )}
           </div>
 
         ) : (
@@ -245,6 +258,9 @@ this.setState((state) => ({
                 </div>
             </div>
         </div>
+        <div className="open-search">
+              <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
+              </div>
     </div>
 </div>
 )}

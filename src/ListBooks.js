@@ -35,7 +35,7 @@ class ListBooks extends Component {
     console.log("Inside ListBooks.js ... Books are ... ")
     console.log(books)
     
-
+if (books.length > 0){
     return (
       <div className='bookshelf-books'>
         <ol className='books-grid'>            
@@ -61,6 +61,11 @@ class ListBooks extends Component {
         </ol>
                   </div>
 )
+  }
+  else 
+    {
+      return (null)
+  }
         }
       }
 
