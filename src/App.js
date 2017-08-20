@@ -117,15 +117,36 @@ this.setState((state) => ({
             }
        )}
  ) }
+
+
+  removeDuplicate(CurState, bookId){
+    console.log("BOOKID IZZ ... ", bookId)
+
+     this.setState({CurState: CurState.filter((b) => b.id !== bookId)})
+  }
   
 
   addBookChoice = (book, shelf) => {
     console.log("Inside of AddBookChoice the book is ", book, " the value is ", shelf)
-    book.shelf = shelf;
-    this.mapBookToState(book, shelf);
+
+    this.removeDuplicate(this.state.read, book.id)
+    
+/**
+    this.setState((state) => ({
+      read: state.read.filter((b) => b.id !== book.id)
+    }))
+    this.setState((state) => ({
+      currentlyReading: state.currentlyReading.filter((b) => b.id !== book.id)
+    }))
+    this.setState((state) => ({
+      wantToRead: state.wantToRead.filter((b) => b.id !== book.id)
+    }))
+    */
     BooksAPI.update(book, shelf).then(()=>{
            console.log('book was updated');            
        })
+    book.shelf = shelf;
+    this.mapBookToState(book, shelf);
 
 
     /**
