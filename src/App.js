@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import ListBooks from './ListBooks'
 import './App.css'
@@ -48,54 +49,6 @@ class BooksApp extends React.Component {
 
 
 
-   
-/**
-    .then((books) => {
-      retBooks = [books]
-    })
-    */
-
-
-
-      /**
-      books.map((book) => {
-        book.shelf = "reading"
-        console.log(book)
-
-/**
-        this.setState((state) => ({
-      books: this.state.read.concat( state.read.filter((c) => c.id == book.id))
-    }))
-
-         this.setState((state) => ({
-      books: this.state.currentlyReading.concat( state.currentlyReading.filter((c) => c.id == book.id))
-    }))
-
-this.setState((state) => ({
-      books: this.state.wantToRead.concat( state.wantToRead.filter((c) => c.id == book.id))
-    }))
-    */
-
-
-
-        //console.log(this.state.read.filter((c) => c.id == book.id))
-
-        //console.log(book)
-      //}
-      //this.setState({ books })
-    //})
-    //)}
-  //)}
-
-/**
-  removeContact = (contact) => {
-    this.setState((state) => ({
-      contacts: state.contacts.filter((c) => c.id !== contact.id)
-    }))
-
-    ContactsAPI.remove(contact)
-  }
-*/
 
    mapBookToState (book, shelf) {
     if (book.shelf){
@@ -159,77 +112,16 @@ this.setState((state) => ({
        })
     book.shelf = shelf;
     this.mapBookToState(book, shelf);
-
-
-    /**
-    console.log("THE BOOK ID CHOICE IS ", bookIdChoice);
-
-
-
-    var id = bookIdChoice.split("|")[0]
-    var choice = bookIdChoice.split("|")[1]
-    console.log("The ID is ", id)
-    var book = this.state.books.filter((book) => book.id == id)
-    console.log("Inside of ListBooks.js the choice is ", choice)
-    //book.choice = bookIdChoice
-    book.shelf = choice
-    console.log("THE BIG BOOK IS ", book)
-    //book.shelf = "wantToRead"
-
-    this.mapBookToState(book);
-
-    
-    console.log("choice == ", choice)
-    
-    BooksAPI.update(book, choice).then(()=>{
-           console.log('book was updated');            
-       })
-  
-    
-
-    console.log("After setting state the book is ");
-    console.log(book);
-    */
    
 
   }
 
-  render() {
+render() {
     return (
       <div className="app">
         {this.state.showSearchPage ? (
-          <div className="search-books">
-            <div className="search-books-bar">
-              <a className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</a>
-              <div className="search-books-input-wrapper">
-                {/* 
-                  NOTES: The search from BooksAPI is limited to a particular set of search terms.
-                  You can find these search terms here:
-                  https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
-                  
-                  However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-                  you don't find a specific author or title. Every search is limited by search terms.
-                */}
 
-                <input type="text" onChange={(event) => this.updateQuery(event.target.value)} placeholder="Search by title or author" content={this.state.query}/>
-    
-              </div>
-            </div>
-            <div className="search-books-results">
-              <ol className="books-grid"></ol>
-            </div>
-          {(this.state.books !== undefined) && (
-           <div className="list-books">
-            <ListBooks
-                  books={this.state.books}
-                  onAddBookChoice={this.addBookChoice}
-                />
-          </div>
-        )}
-          </div>
-
-        ) : (
-       <div className="list-books">
+<div className="list-books">
     <div className="list-books-title">
         <h1>MyReads</h1>
     </div>
@@ -259,12 +151,55 @@ this.setState((state) => ({
             </div>
         </div>
         <div className="open-search">
-              <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
+              <a onClick={() => this.setState({ showSearchPage: false })}>Add a book</a>
               </div>
     </div>
 </div>
-)}
-</div>
+
+
+
+        ) : (
+
+  <div className="search-books">
+            <div className="search-books-bar">
+              <a className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</a>
+              <div className="search-books-input-wrapper">
+                {/* 
+                  NOTES: The search from BooksAPI is limited to a particular set of search terms.
+                  You can find these search terms here:
+                  https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
+                  
+                  However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
+                  you don't find a specific author or title. Every search is limited by search terms.
+                */}
+
+                <input type="text" onChange={(event) => this.updateQuery(event.target.value)} placeholder="Search by title or author" content={this.state.query}/>
+    
+              </div>
+            </div>
+            <div className="search-books-results">
+              <ol className="books-grid"></ol>
+            </div>
+          {(this.state.books !== undefined) && (
+           <div className="list-books">
+            <ListBooks
+                  books={this.state.books}
+                  onAddBookChoice={this.addBookChoice}
+                />
+          </div>
+        )}
+          </div>
+         
+
+)
+}
+
+
+ </div>
+
+
+
+
 )
 }
 }
