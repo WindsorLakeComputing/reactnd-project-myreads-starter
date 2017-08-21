@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Route } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import ListBooks from './ListBooks'
 import './App.css'
@@ -68,6 +68,9 @@ class BooksApp extends React.Component {
             }
     }
 
+  
+  
+
   componentDidMount(){
     BooksAPI.getAll().then((books) => {
           books.map((book, None) => {
@@ -116,50 +119,51 @@ class BooksApp extends React.Component {
 render() {
     return (
       <div className="app">
-        {this.state.showSearchPage ? (
-
-<div className="list-books">
-    <div className="list-books-title">
-        <h1>MyReads</h1>
-    </div>
-    <div className="list-books-content">
-        <div>
-            <div className="bookshelf">
-                <h2 className="bookshelf-title">Currently Reading</h2>
-                <div className="bookshelf-books">
-                    <ol className="books-grid">
-                        <ListBooks books={this.state.currentlyReading} onAddBookChoice={this.addBookChoice} />
-                    </ol>
-                </div>
+<Route exact path="/" render={()=> (
+    <div className="list-books">
+        <div className="list-books-title">
+            <h1>MyReads</h1>
+        </div>
+        <div className="list-books-content">
+            <div>
                 <div className="bookshelf">
-                    <h2 className="bookshelf-title">Want to Read</h2>
-                    <ol className="books-grid">
-                        <ListBooks books={this.state.wantToRead} onAddBookChoice={this.addBookChoice} />
-                    </ol>
+                    <h2 className="bookshelf-title">Currently Reading</h2>
+                    <div className="bookshelf-books">
+                        <ol className="books-grid">
+                            <ListBooks books={this.state.currentlyReading} onAddBookChoice={this.addBookChoice} />
+                        </ol>
+                    </div>
                     <div className="bookshelf">
-                        <h2 className="bookshelf-title">Read</h2>
-                        <div className="bookshelf-books">
-                            <ol className="books-grid">
-                                <ListBooks books={this.state.read} onAddBookChoice={this.addBookChoice} />
-                            </ol>
+                        <h2 className="bookshelf-title">Want to Read</h2>
+                        <ol className="books-grid">
+                            <ListBooks books={this.state.wantToRead} onAddBookChoice={this.addBookChoice} />
+                        </ol>
+                        <div className="bookshelf">
+                            <h2 className="bookshelf-title">Read</h2>
+                            <div className="bookshelf-books">
+                                <ol className="books-grid">
+                                    <ListBooks books={this.state.read} onAddBookChoice={this.addBookChoice} />
+                                </ol>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div className="open-search">
+                <Link to="/search">Add a book</Link>
+            </div>
         </div>
-        <div className="open-search">
-              <a onClick={() => this.setState({ showSearchPage: false })}>Add a book</a>
-              </div>
     </div>
-</div>
+    )}/>
 
 
 
-        ) : (
 
+         <Route path="/search" render ={() => (
   <div className="search-books">
             <div className="search-books-bar">
-              <a className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</a>
+
+              <Link className="close-search" to="/">List books</Link>
               <div className="search-books-input-wrapper">
                 {/* 
                   NOTES: The search from BooksAPI is limited to a particular set of search terms.
@@ -185,20 +189,18 @@ render() {
                 />
           </div>
         )}
-          </div>
-         
-
-)
-}
+          </div>   
+)}/>
+</div>
 
 
- </div>
-
-
-
-
+       
 )
 }
 }
+
+
+
+
 
 export default BooksApp
