@@ -68,9 +68,6 @@ class BooksApp extends React.Component {
             }
     }
 
-  
-  
-  
   componentDidMount(){
     BooksAPI.getAll().then((books) => {
           books.map((book, None) => {
