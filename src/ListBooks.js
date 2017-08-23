@@ -7,35 +7,11 @@ class ListBooks extends Component {
     books: PropTypes.array.isRequired,
     onAddBookChoice: PropTypes.func.isRequired
   }
-/**
-  state = {
-    value:''
-  }
-  */
-/**
-  handleChange = (e) => {
-    const { onAddBookChoice } = this.props
-    /**
-    this.setState({value: e.target.value});
-    var id = e.target.value.split("|")[0]
-    var choice = e.target.value.split("|")[1]
-    let bookChoice = books.filter((book) => book.id == id)
-    console.log("Inside of ListBooks.js the choice is ", choice)
-    bookChoice.choice = choice
-    
-    //bookChoice.choice = e.target.value
-    //console.log("BOOK choice is ", bookChoice.choice)
-    onAddBookChoice(e.target.value)
-  }
-  */
 
   render() {
-    //console.log("this.state.value ==", this.state.value);
     const { books } = this.props
-    console.log("Inside ListBooks.js ... Books are ... ")
-    console.log(books)
     
-if (books.length > 0){
+  if (books.length > 0){
     return (
       <div className='bookshelf-books'>
         <ol className='books-grid'>            
@@ -49,7 +25,7 @@ if (books.length > 0){
                         <option value="none" disabled>Move to...</option>
                         <option value={"currentlyReading"}>Currently Reading</option>
                         <option value={"wantToRead"}>Want to Read</option>
-                       <option value={"read"}>Read</option>
+                        <option value={"read"}>Read</option>
                       </select>
                     </div>
                   </div>
@@ -59,14 +35,11 @@ if (books.length > 0){
             </li>
           ))}
         </ol>
-                  </div>
-)
-  }
-  else 
-    {
-      return (null)
-  }
-        }
-      }
+      </div>
+    )}
+  else {
+    return (null)
+  }}
+}
 
 export default ListBooks
