@@ -1,7 +1,7 @@
 ## Installation
 ```
 WARNING: This software is intended to only be run on a computer running the Linux operating system.
-
+```
 Download this project into a directory. Inside of the project root directory run the command 'yarn start'. Within 1 minute a new window will open up inside of your start default browser. The program runs on port 3000 
 
 
