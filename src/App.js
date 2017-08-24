@@ -72,7 +72,9 @@ class BooksApp extends React.Component {
     BooksAPI.update(book, shelf).then(()=>{
       console.debug('book was updated');})
     book.shelf = shelf;
-    this.mapBookToState(book, shelf);
+    if (shelf != "None") {
+      this.mapBookToState(book, shelf);
+    }
   }
 
   render() {
