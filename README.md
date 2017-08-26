@@ -2,7 +2,10 @@
 ```
 WARNING: This software is intended to only be run on a computer running the Linux operating system.
 ```
-Download this project into a directory. Inside of the project root directory run the command 'yarn start'. Within 1 minute a new window will open up inside of your start default web browser. The program will run on localhost with a port number of 3000.  
+Download this project into a directory. Inside of the project root directory run the command 'yarn install' in order to install dependencies.
+
+## Running
+Inside of the project root directory run the command 'yarn start' in order to begin hosting the project. Within 1 minute a new window will open up inside of your start default web browser. The program will run on localhost with a port number of 3000.  
 
 
 ## What You're Getting
