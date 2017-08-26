@@ -87,28 +87,9 @@ class BooksApp extends React.Component {
       </div>
       <div className="list-books-content">
         <div>
-          <div className="bookshelf">
-            <h2 className="bookshelf-title">Currently Reading</h2>
-            <div className="bookshelf-books">
-              <ol className="books-grid">
-                <ListBooks books={this.state.currentlyReading} onAddBookChoice={this.addBookChoice}/>
-              </ol>
-            </div>
-            <div className="bookshelf">
-              <h2 className="bookshelf-title">Want to Read</h2>
-              <ol className="books-grid">
-                <ListBooks books={this.state.wantToRead} onAddBookChoice={this.addBookChoice}/>
-              </ol>
-            <div className="bookshelf">
-              <h2 className="bookshelf-title">Read</h2>
-            <div className="bookshelf-books">
-              <ol className="books-grid">
-                <ListBooks books={this.state.read} onAddBookChoice={this.addBookChoice}/>
-              </ol>
-            </div>
-            </div>
-            </div>
-          </div>
+          <ListBooks books={this.state.currentlyReading} onAddBookChoice={this.addBookChoice} heading={"Currently Reading"}/>
+          <ListBooks books={this.state.wantToRead} onAddBookChoice={this.addBookChoice} heading={"Want to Read"}/>
+          <ListBooks books={this.state.read} onAddBookChoice={this.addBookChoice} heading={"Read"}/>
         </div>
         <div className="open-search">
           <Link to="/search">Add a book</Link>

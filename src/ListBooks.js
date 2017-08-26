@@ -5,15 +5,17 @@ import escapeRegExp from 'escape-string-regexp'
 class ListBooks extends Component {
   static propTypes = {
     books: PropTypes.array.isRequired,
-    onAddBookChoice: PropTypes.func.isRequired
+    onAddBookChoice: PropTypes.func.isRequired,
+    heading: PropTypes.string
   }
 
   render() {
-    const { books } = this.props
-    
+    const { books, heading } = this.props
+
   if (books.length > 0){
     return (
       <div className='bookshelf-books'>
+      <h2 className="bookshelf-title">{heading}</h2>
         <ol className='books-grid'>            
           {books.map((book) => (
             <li key={book.id} className='book-list-item'>
